@@ -1,12 +1,12 @@
-const express = require('express');
+import express from 'express';
+import ProductController from'./src/controllers/product.controller.js';
 const app = express();
 
-app.get('/',(req,res)=>{
-    return res.send('Welcome to inventory app');
-})
+const productController = new ProductController();
+app.get('/',productController.getProducts);
 
 
-const port = 3100;
+const port = 3200;
 app.listen(port,()=>{
     console.log('server is running on port ',port);
 });
