@@ -2,7 +2,7 @@ import express from 'express';
 import ProductController from'./src/controllers/product.controller.js';
 import path from 'path';
 import expressLayouts from 'express-ejs-layouts';
-
+import validationMiddleware from './src/middlewares/validation-middleware.js';
 const app = express();
 
 //setting up ejs view engine
@@ -13,7 +13,7 @@ app.use(express.urlencoded({extended:true}));
 const productController = new ProductController();
 app.get('/',productController.getProducts);
 app.get('/new',productController.addNewForm);
-app.post('/',productController.addProduct);
+app.post('/',validationMiddleware,productController.addProduct);
 app.use(express.static('src/views'));
 
 app.get('/',(req,res)=>{
