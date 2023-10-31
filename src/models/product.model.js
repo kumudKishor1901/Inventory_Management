@@ -14,6 +14,16 @@ export default class ProductModel{
         return product;
     }
 
+    static getById(id){
+      return product.find((p)=> p.id == id);
+    }
+
+    static update(productObj){
+        let index = product.findIndex((p)=> p.id == productObj.id);
+        product[index] = productObj;
+    }
+
+
     static add(productObj){
         let newProduct = new ProductModel(
             product.length+1,

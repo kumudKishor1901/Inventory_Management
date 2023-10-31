@@ -8,18 +8,24 @@ const app = express();
 //setting up ejs view engine
 app.set('view engine','ejs');
 app.set('views',path.join(path.resolve(),'src','views'));
+
+// using express layouts middleware for all
 app.use(expressLayouts);
+
 app.use(express.urlencoded({extended:true}));
+
 const productController = new ProductController();
 app.get('/',productController.getProducts);
 app.get('/new',productController.addNewForm);
+
+app.get('/update-product/:id',productController.getUpdateForm);
+
 app.post('/',validationMiddleware,productController.addProduct);
+
+app.post('/update-product',validationMiddleware, productController.postUpdateProduct);
 app.use(express.static('src/views'));
 
-app.get('/',(req,res)=>{
-    return res.send('Welcome to inventory app');
 
-})
 
 const port = 3200;
 app.listen(port,()=>{
