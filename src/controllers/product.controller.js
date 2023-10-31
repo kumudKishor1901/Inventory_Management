@@ -43,4 +43,24 @@ export default class ProductController{
         
 
     }
+
+    deleteProduct(req,res){
+        let id = req.params.id;
+        let productFound = ProductModel.getById(id);
+        if(!productFound){
+            return res.status(401).send('Product not found');
+       }else{
+
+        let decision = confirm('Are you Sure ?? You want to Delete!!!!');
+        if(decision){
+            ProductModel.deleteById(id);
+        }
+       
+        let products = ProductModel.get();
+        return res.render('products',{products});
+       }
+
+
+        
+    }
 }

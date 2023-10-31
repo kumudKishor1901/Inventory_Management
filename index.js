@@ -23,6 +23,8 @@ app.get('/update-product/:id',productController.getUpdateForm);
 app.post('/',validationMiddleware,productController.addProduct);
 
 app.post('/update-product',validationMiddleware, productController.postUpdateProduct);
+
+app.get('/delete/:id',productController.deleteProduct);
 app.use(express.static('src/views'));
 
 

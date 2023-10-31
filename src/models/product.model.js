@@ -18,6 +18,12 @@ export default class ProductModel{
       return product.find((p)=> p.id == id);
     }
 
+    static deleteById(id){
+        let index = product.findIndex((p)=>p.id==id);
+        product.splice(index,1);
+       
+    }
+
     static update(productObj){
         let index = product.findIndex((p)=> p.id == productObj.id);
         product[index] = productObj;
