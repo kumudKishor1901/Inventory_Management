@@ -8,6 +8,8 @@ const app = express();
 //setting up ejs view engine
 app.set('view engine','ejs');
 app.set('views',path.join(path.resolve(),'src','views'));
+app.use(express.static('src/views'));
+app.use(express.static('public'));
 
 // using express layouts middleware for all
 app.use(expressLayouts);
@@ -24,8 +26,8 @@ app.post('/',validationMiddleware,productController.addProduct);
 
 app.post('/update-product',validationMiddleware, productController.postUpdateProduct);
 
-app.get('/delete/:id',productController.deleteProduct);
-app.use(express.static('src/views'));
+app.post('/delete-product/:id',productController.deleteProduct);
+
 
 
 
