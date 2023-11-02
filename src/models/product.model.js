@@ -30,13 +30,13 @@ export default class ProductModel{
     }
 
 
-    static add(productObj){
+    static add(name,description,price,imageUrl){
         let newProduct = new ProductModel(
             product.length+1,
-            productObj.name,
-            productObj.description,
-            productObj.price,
-            productObj.imageUrl);
+            name,
+            description,
+            price,
+            imageUrl);
 
         product.push(newProduct);
 

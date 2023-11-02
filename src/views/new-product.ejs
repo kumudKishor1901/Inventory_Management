@@ -7,7 +7,7 @@
         <%=errorMessage%>
       </div>
 <%}%>
-<form action="/" method="post">
+<form action="/" method="post" enctype="multipart/form-data">
     <div class="mb-3">
         <label for="name" class="form-label">Product Name</label>
         <input type="text" class="form-control" id="name" name="name" >
@@ -21,8 +21,8 @@
         <input type="number" class="form-control" id="price" name="price" >
     </div>
     <div class="mb-3">
-        <label for="imageUrl" class="form-label">Image URL</label>
-        <input type="text" class="form-control" id="imageUrl" name="imageUrl">
+        <label for="imageUrl" class="form-label">UPLOAD IMAGE</label>
+        <input type="file" class="form-control" id="imageUrl" name="imageUrl" accept="images/*">
     </div>
     <button type="submit" class="btn btn-primary">Add Product</button>
 </form>

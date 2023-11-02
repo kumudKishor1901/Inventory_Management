@@ -1,0 +1,6 @@
+Upload File steps:-
+1- Install Multer
+2- Make changes in Views
+3- Middleware to Handle files
+4- Apply that Middleware
+5- Update controller to update URL of Images.

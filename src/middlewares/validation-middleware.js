@@ -8,7 +8,18 @@ const validationMiddleware = async (req,res,next)=>{
         body('name').notEmpty().withMessage('Name is required'),
         body('description').notEmpty().withMessage('description is required'),
         body('price').isFloat({gt:0}).withMessage('Price must be a positive value'),
-        body('imageUrl').isURL().withMessage('Invalid URL')
+
+        
+
+        
+        body('imageUrl').custom((value,{req})=>{
+            if(!req.file){
+                throw new Error('Image is Required');
+            }
+            else{
+                return true;
+            }
+        })
      ];
 
 
