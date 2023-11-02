@@ -6,4 +6,23 @@ export default class UserModel{
         this.email = email;
         this.password = password;
     }
+
+    static get(){
+        return users;
+    }
+
+    
+
+    static add(userObj){
+        const user = new UserModel(
+            users.length+1,
+            userObj.name,
+            userObj.email,
+            userObj.password,
+        );
+        users.push(user);
+        console.log(users);
+    }
 }
+
+const users = [];

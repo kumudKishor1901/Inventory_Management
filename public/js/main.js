@@ -13,3 +13,7 @@ function deleteProduct(id){
 
     }
 }
+
+function notification(){
+    alert('Successfully Registered');
+}
