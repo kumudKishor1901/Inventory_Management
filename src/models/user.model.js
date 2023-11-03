@@ -23,6 +23,11 @@ export default class UserModel{
         users.push(user);
         console.log(users);
     }
+
+   static checkLoginDetails(email,password){
+        return users.find((user)=>user.email===email && user.password === password);
+            
+    }
 }
 
 const users = [];

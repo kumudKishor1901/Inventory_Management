@@ -25,15 +25,17 @@ const productController = new ProductController();
 app.get('/',productController.getProducts);
 app.get('/new',productController.addNewForm);
 app.get('/update-product/:id',productController.getUpdateForm);
-app.get('/signup',userController.getRegistrationForm);
+app.get('/signup',userController.getRegistrationPage);
+app.get('/login',userController.getLoginPage);
 
 
 //POST REQUESTS
 
 app.post('/',upload.single('imageUrl'),validationMiddleware,productController.addProduct);
-app.post('/update-product',validationMiddleware, productController.postUpdateProduct);
+app.post('/update-product', productController.postUpdateProduct);
 app.post('/delete-product/:id',productController.deleteProduct);
 app.post('/register',userController.register);
+app.post('/login',userController.postLogin);
 
 
 
