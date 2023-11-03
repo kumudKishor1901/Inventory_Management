@@ -5,6 +5,8 @@ import expressLayouts from 'express-ejs-layouts';
 import validationMiddleware from './src/middlewares/product-validation-middleware.js';
 import { upload } from './src/middlewares/file-upload-middleware.js';
 import UserController from './src/controllers/user.controller.js';
+import session from 'express-session';
+import { auth } from './src/middlewares/auth-middleware.js';
 const app = express();
 
 //setting up ejs view engine
@@ -12,6 +14,12 @@ app.set('view engine','ejs');
 app.set('views',path.join(path.resolve(),'src','views'));
 app.use(express.static('src/views'));
 app.use(express.static('public'));
+app.use(session({
+    secret: 'secretKey',
+    resave: false,
+    saveUninitialized: false,
+    cookie : {secure:false}
+}));
 
 // using express layouts middleware for all
 app.use(expressLayouts);
@@ -22,9 +30,9 @@ const productController = new ProductController();
 
 // GET Requests
 
-app.get('/',productController.getProducts);
-app.get('/new',productController.addNewForm);
-app.get('/update-product/:id',productController.getUpdateForm);
+app.get('/',auth,productController.getProducts);
+app.get('/new',auth,productController.addNewForm);
+app.get('/update-product/:id',auth,productController.getUpdateForm);
 app.get('/signup',userController.getRegistrationPage);
 app.get('/login',userController.getLoginPage);
 

@@ -17,6 +17,7 @@ export default class UserController{
         const {email,password} = req.body;
         const result = UserModel.checkLoginDetails(email,password);
         if(result){
+            req.session.email = email;
             const products = ProductModel.get();
             res.render('products',{products:products});
         }
