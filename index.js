@@ -35,6 +35,7 @@ app.get('/new',auth,productController.addNewForm);
 app.get('/update-product/:id',auth,productController.getUpdateForm);
 app.get('/signup',userController.getRegistrationPage);
 app.get('/login',userController.getLoginPage);
+app.get('/logout',userController.logout);
 
 
 //POST REQUESTS

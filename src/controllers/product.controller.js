@@ -6,12 +6,12 @@ export default class ProductController{
     getProducts(req,res){
         let products = ProductModel.get();
         // console.log(products);
-        return res.render("products",{products:products});
+        return res.render("products",{products:products,email:req.session.email});
         //return res.sendFile(path.join(path.resolve(),'src','views','products.ejs'));
     }
 
     addNewForm(req,res){
-        return res.render('new-product',{errorMessage:null});
+        return res.render('new-product',{errorMessage:null,email:req.session.email});
     };
 
     getUpdateForm(req,res){
@@ -20,7 +20,7 @@ export default class ProductController{
         // console.log(id,productFound);
 
         if(productFound){
-             res.render('update-product',{product : productFound, errorMessage: null});
+             res.render('update-product',{product : productFound, errorMessage: null,email:req.session.email});
         }else{
             res.status(401).send('Product not found');
         }
@@ -31,7 +31,7 @@ export default class ProductController{
         // console.log(req.body);
         ProductModel.update(req.body);
         let products = ProductModel.get();
-         res.render('products',{products});
+         res.render('products',{products,email:req.session.email});
 
     }
 
@@ -43,7 +43,7 @@ export default class ProductController{
         // ProductModel.add(req.body);
         ProductModel.add(name,description,price,imageUrl);
         let products = ProductModel.get();
-        return res.render('products',{products});
+        return res.render('products',{products,email:req.session.email});
         
 
     }
@@ -56,7 +56,7 @@ export default class ProductController{
        }else{
             ProductModel.deleteById(id);
             let products = ProductModel.get();
-            return res.render('products',{products});
+            return res.render('products',{products,email:req.session.email});
         }
        
        
