@@ -7,6 +7,9 @@ import { upload } from './src/middlewares/file-upload-middleware.js';
 import UserController from './src/controllers/user.controller.js';
 import session from 'express-session';
 import { auth } from './src/middlewares/auth-middleware.js';
+import cookieParser from 'cookie-parser';
+import { setLastVisit } from './src/middlewares/lastVisit-middleware.js';
+
 const app = express();
 
 //setting up ejs view engine
@@ -21,6 +24,9 @@ app.use(session({
     cookie : {secure:false}
 }));
 
+app.use(cookieParser());
+
+
 // using express layouts middleware for all
 app.use(expressLayouts);
 
@@ -34,7 +40,7 @@ app.get('/',auth,productController.getProducts);
 app.get('/new',auth,productController.addNewForm);
 app.get('/update-product/:id',auth,productController.getUpdateForm);
 app.get('/signup',userController.getRegistrationPage);
-app.get('/login',userController.getLoginPage);
+app.get('/login',setLastVisit,userController.getLoginPage);
 app.get('/logout',userController.logout);
 
 
